@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React, { Suspense, useEffect } from "react";
 import { Outlet, createBrowserRouter, useLocation } from "react-router-dom";
 import Header from "../components/Header";
@@ -42,16 +41,7 @@ export const router = createBrowserRouter([
 
       {
         path: "/dashboard/:city",
-        element: (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <Details />
-          </motion.div>
-        ),
+        element: <Details />,
       },
     ],
   },

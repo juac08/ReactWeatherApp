@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_THEME, SET_UNIT } from "../store/settings/settingsSlice";
 import { RootState } from "../store/store";
-import BrandTooltip from "./UI/BrandTooltip/BrandTooltip";
+import BrandTooltip from "./UI/Tooltip/BrandTooltip";
 
 /**
  * React Functional Component.
@@ -50,9 +50,11 @@ const Header: React.FC<HeaderOwnProps> = () => {
     <Flex
       justifyContent="space-between"
       alignItems="center"
-      bg="purple.900"
+      bg="purple.600"
       p="20px"
-      borderRadius={"md"}
+      position={"sticky"}
+      top={0}
+      zIndex={1}
     >
       <Text color="white">Weather App</Text>
       <Flex gap={2}>

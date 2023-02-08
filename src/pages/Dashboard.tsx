@@ -2,8 +2,8 @@ import { Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DashBoardCard from "../components/DashboardCard";
-import DashboardForm from "../components/DashboardForm";
+import DashBoardCard from "../components/DashBoard/DashboardCard";
+import DashboardForm from "../components/DashBoard/DashboardForm";
 import { useFetchLocation } from "../helpers/hooks/useGetData";
 import { RootState } from "../store/store";
 import {
@@ -29,16 +29,13 @@ const Dashboard: React.FC<DashboardOwnProps> = () => {
   React.useEffect(() => {
     if (location) {
       setCity(location);
-    } else if (location !== cityName) {
-      setCity(cityName);
     }
     const interval = setInterval(() => {
       dispatch(RESET_LOCATION(""));
       dispatch(RESET_WEATHER_DATA());
     }, 180000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cityName, location]);
+  }, [cityName, dispatch, location]);
 
   return (
     <motion.div
@@ -50,7 +47,7 @@ const Dashboard: React.FC<DashboardOwnProps> = () => {
       <Flex mt="20px" flexDir="column" justifyContent="center">
         <DashboardForm onCityChange={onCityChange} />
         <Flex
-          mt="30px"
+          mt="50px"
           justifyContent={["center", "center", "space-between"]}
           flexWrap="wrap"
           alignItems="center"

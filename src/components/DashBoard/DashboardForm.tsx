@@ -11,6 +11,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 
 /**
@@ -18,6 +19,7 @@ import {
  */
 const DashboardForm: React.FC<DashboardFormOwnProps> = ({ onCityChange }) => {
   const [input, setInput] = useState("");
+  const Toast = useToast();
 
   const handleInputChange = (e: any) => {
     e.preventDefault();
@@ -25,13 +27,22 @@ const DashboardForm: React.FC<DashboardFormOwnProps> = ({ onCityChange }) => {
   };
 
   const handleSubmit = () => {
-    if (!input) return;
+    if (!input) {
+      Toast({
+        description: "Please enter a city name.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
     onCityChange(input);
     setInput("");
   };
 
   return (
-    <Flex mt="20px">
+    <Flex mt="20px" p={["20px", "0", "0"]}>
       <FormControl isRequired maxW={"400px"}>
         <FormLabel cursor="pointer">City Name</FormLabel>
         <InputGroup size="md">
@@ -40,7 +51,6 @@ const DashboardForm: React.FC<DashboardFormOwnProps> = ({ onCityChange }) => {
             placeholder="Enter city name and press enter..."
             onChange={handleInputChange}
             variant="flushed"
-            colorScheme={"red"}
             value={input}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -48,7 +58,7 @@ const DashboardForm: React.FC<DashboardFormOwnProps> = ({ onCityChange }) => {
               }
             }}
             _focusVisible={{
-              borderColor: "purple",
+              borderColor: "purple.600",
             }}
           />
           <InputLeftElement>

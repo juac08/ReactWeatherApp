@@ -1,21 +1,20 @@
 import { extendTheme } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 import { buttonTheme } from "./Button";
+import { textTheme } from "./Text";
 
 export const theme = extendTheme({
   colors: {
-    brand: {
-      "50": "#EBEAFA",
-      "75": "#BFBCEF",
-      "100": "#C8C5F1",
-      "200": "#A4A0E9",
-      "300": "#817BE0",
-      "400": "#5E55D7",
-      "500": "#3A30CF",
-      "600": "#2F27A5",
-      "700": "#231D7C",
-      "800": "#171353",
-      "900": "#0C0A29",
+    primary: {
+      100: "purple.100",
+      200: "purple.200",
+      300: "purple.300",
+      400: "purple.400",
+      500: "purple.500",
+      600: "purple.600",
+      700: "purple.700",
+      800: "purple.800",
+      900: "purple.900",
     },
     gray: {
       100: "#7f7f7f",
@@ -31,12 +30,16 @@ export const theme = extendTheme({
   },
   components: {
     buttonTheme,
+    textTheme,
   },
   styles: {
     global: (props: any) => ({
       body: {
-        bg: mode("#ffffff", "#000000")(props),
+        bg: mode("#ffffff", "#181818")(props),
         color: mode("#000000", "#ffffff")(props),
+      },
+      border: {
+        borderColor: mode("#6B46C1", "#B794F4")(props),
       },
     }),
   },

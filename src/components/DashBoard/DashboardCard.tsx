@@ -1,18 +1,21 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, RepeatIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
   Heading,
+  Text,
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useFetchData } from "../helpers/hooks/useGetData";
-import { RootState } from "../store/store";
-import LoadingSkelton from "./UI/Loading/LoadingSkelton";
+import { useFetchData } from "../../helpers/hooks/useGetData";
+import { RootState } from "../../store/store";
+import LoadingSkelton from "../UI/Loading/LoadingSkelton";
+import BrandTooltip from "../UI/Tooltip/BrandTooltip";
 
 /**
  * React Functional Component.
@@ -32,16 +35,18 @@ const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
   };
 
   return (
-    <>
+    <Box>
       {loading && <LoadingSkelton loading={loading} />}
-      {error && <p>Error</p>}
+      {error && !data && (
+        <Text>
+          {error}
+          <Button {...buttonStyle} onClick={() => window.location.reload()}>
+            <RepeatIcon />
+          </Button>
+        </Text>
+      )}
       {data && (
-        <Card
-          variant="elevated"
-          minW={"300px"}
-          align="center"
-          borderTop="1px solid purple"
-        >
+        <Card {...cardStyle}>
           <CardHeader>
             <Heading size="md"> {data.name}</Heading>
           </CardHeader>
@@ -52,17 +57,20 @@ const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
             </Heading>
           </CardBody>
           <CardFooter>
-            <Button
-              colorScheme="purple"
-              variant="outline"
-              onClick={handleClick}
-            >
-              View Details <ArrowForwardIcon ml="10px" />
-            </Button>
+            <BrandTooltip label="Click for details.">
+              <Button
+                colorScheme="purple"
+                variant="outline"
+                onClick={handleClick}
+                rightIcon={<ArrowForwardIcon />}
+              >
+                View Details
+              </Button>
+            </BrandTooltip>
           </CardFooter>
         </Card>
       )}
-    </>
+    </Box>
   );
 };
 
@@ -74,3 +82,18 @@ interface DashBoardCardOwnProps {
 }
 
 export default React.memo(DashBoardCard);
+
+const buttonStyle = {
+  colorScheme: "purple",
+  variant: "outline",
+  ml: "10px",
+  size: "sm",
+};
+
+const cardStyle = {
+  variant: "elevated",
+  minW: "300px",
+  align: "center",
+  borderTop: "1px solid",
+  borderColor: "purple.600",
+};

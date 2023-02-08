@@ -6,7 +6,7 @@ import {
   SkeletonText,
 } from "@chakra-ui/react";
 import React from "react";
-import BrandTooltip from "../BrandTooltip/BrandTooltip";
+import BrandTooltip from "../Tooltip/BrandTooltip";
 
 /**
  * React Functional Component.
@@ -18,7 +18,8 @@ const LoadingSkelton: React.FC<LoadingSkeltonOwnProps> = ({ loading }) => {
         padding="6"
         boxShadow="lg"
         minW={"300px"}
-        borderTop="1px solid purple"
+        borderTop="1px solid "
+        borderColor="purple"
         borderRadius={"md"}
       >
         <Skeleton isLoaded={loading} fadeDuration={1}>

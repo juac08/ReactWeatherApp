@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosInstance } from "../../axios";
@@ -16,11 +17,12 @@ export const useFetchData = (url: string) => {
   const weatherData = useSelector(
     (state: RootState) => state.weatherData.weatherData
   );
+  const Toast = useToast();
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const isDataAvailable = weatherData.find((item) => item.name === url);
+      const isDataAvailable = weatherData.find((data) => data.name === url);
       if (!isDataAvailable) {
         const response = await axiosInstance.get(
           `?q=${url}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
@@ -31,7 +33,14 @@ export const useFetchData = (url: string) => {
         setData(isDataAvailable);
       }
     } catch (error: any) {
-      setError(error.message);
+      Toast({
+        description: "City not found. Please try again.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      setError(error.response.statusText);
     }
     setLoading(false);
   };
@@ -48,6 +57,7 @@ export const useFetchData = (url: string) => {
 export const useFetchLocation = () => {
   const [cityName, setCityName] = useState("");
   const dispatch = useDispatch();
+  const Toast = useToast();
 
   const getLocation = async (latitude: number, longitude: number) => {
     try {
@@ -57,7 +67,13 @@ export const useFetchLocation = () => {
       setCityName(data.data.name);
       dispatch(SET_LOCATION(data.data.name));
     } catch (error: any) {
-      console.log(error);
+      Toast({
+        description: "There was an error fetching your location.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
     }
   };
 
