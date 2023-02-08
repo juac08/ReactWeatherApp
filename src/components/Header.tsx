@@ -1,21 +1,23 @@
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text, useColorMode } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_THEME, SET_UNIT } from "../store/settings/settingsSlice";
 import { RootState } from "../store/store";
+import BrandTooltip from "./UI/tooltip/BrandTooltip";
 
 /**
  * React Functional Component.
  */
 const Header: React.FC<HeaderOwnProps> = () => {
   const settings = useSelector((state: RootState) => state.settings);
+  const { colorMode, toggleColorMode } = useColorMode();
+
   const dispatch = useDispatch();
 
   const setTheme = () => {
-    settings.theme === "light"
-      ? dispatch(SET_THEME("dark"))
-      : dispatch(SET_THEME("light"));
+    toggleColorMode();
+    dispatch(SET_THEME(colorMode));
   };
 
   const setTempUnit = () => {
@@ -25,10 +27,10 @@ const Header: React.FC<HeaderOwnProps> = () => {
   };
 
   const ariaLabelColorMode = useMemo(() => {
-    return settings.theme === "light"
+    return colorMode === "light"
       ? "Switch to Dark mode"
       : "Switch to Light mode";
-  }, [settings.theme]);
+  }, [colorMode]);
 
   const ariaLabelTempUnit = useMemo(() => {
     return settings.tempUnit === "C"
@@ -37,23 +39,37 @@ const Header: React.FC<HeaderOwnProps> = () => {
   }, [settings.tempUnit]);
 
   const themeIcon = useMemo(() => {
-    return settings.theme === "light" ? <SunIcon /> : <MoonIcon />;
-  }, [settings.theme]);
+    return colorMode === "dark" ? <SunIcon /> : <MoonIcon />;
+  }, [colorMode]);
 
   const tempUnitIcon = useMemo(() => {
     return settings.tempUnit === "C" ? "℃" : "℉";
   }, [settings.tempUnit]);
 
   return (
-    <Flex justifyContent="space-between" p="20px">
+    <Flex justifyContent="space-between" p="20px" alignItems="center">
       <Text>Weather App</Text>
       <Flex gap={2}>
-        <Button aria-label={ariaLabelColorMode} onClick={setTheme} size="sm">
-          {themeIcon}
-        </Button>
-        <Button aria-label={ariaLabelTempUnit} onClick={setTempUnit} size="sm">
-          {tempUnitIcon}
-        </Button>
+        <BrandTooltip label={ariaLabelColorMode}>
+          <Button
+            aria-label={ariaLabelColorMode}
+            onClick={setTheme}
+            size="sm"
+            colorScheme={"linkedin"}
+          >
+            {themeIcon}
+          </Button>
+        </BrandTooltip>
+        <BrandTooltip label={ariaLabelTempUnit}>
+          <Button
+            aria-label={ariaLabelTempUnit}
+            onClick={setTempUnit}
+            size="sm"
+            colorScheme={"linkedin"}
+          >
+            {tempUnitIcon}
+          </Button>
+        </BrandTooltip>
       </Flex>
     </Flex>
   );

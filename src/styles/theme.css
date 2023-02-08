@@ -1,0 +1,50 @@
+:root,
+:root[data-theme="light"] {
+    --colorBrand: #6058d8;
+    --gradientBrand: linear-gradient( 135deg, #5763b8 0%, #404987 100%, #404987 100%);
+    --colorDark: #242939;
+    --colorHover: #f7f7f7;
+    --colorBrandText: #6058d8;
+    --WhiteBackground: #fff;
+    --colorMainBackground: #fafcff;
+    --panelBackgroundColor: white;
+    --panelTextColor: var(--gradientBrand);
+    --panelSecondaryTextColor: #212529;
+    --colorElementPrimaryText: #303133;
+    --colorElementRegularText: #606266;
+    --colorElementSecondaryText: #909399;
+    --colorElementPlaceholderText: #c0c4cc;
+    --colorElementBrandHover: #ecf5ff;
+    --colorElementBaseBorder: #dcdfe6;
+    --colorElementLightBorder: #e4e7ed;
+    --colorElementLighterBorder: #ebeef5;
+    --colorElementExtraLightBorder: #f2f6fc;
+    --boxShadowLightColor: #dfdfdf;
+    --menu-background: rgb(233, 233, 233);
+    --menu-background-hover: rgb(198, 198, 198);
+}
+
+:root[data-theme="dark"] {
+    --colorBrand: #6058d8;
+    --gradientBrand: linear-gradient( 135deg, #5763b8 0%, #404987 100%, #404987 100%);
+    --colorDark: #242939;
+    --colorHover: #212121;
+    --colorBrandText: #fff;
+    --WhiteBackground: #121212;
+    --colorMainBackground: #181818;
+    --panelBackgroundColor: #111111;
+    --panelTextColor: white;
+    --panelSecondaryTextColor: #cccccc;
+    --colorElementPrimaryText: #f0f0f0;
+    --colorElementRegularText: #d8d8d8;
+    --colorElementSecondaryText: #bbbbbb;
+    --colorElementPlaceholderText: #c7c7c7;
+    --colorElementBrandHover: #66b1ff20;
+    --colorElementBaseBorder: #303030;
+    --colorElementLightBorder: #383838;
+    --colorElementLighterBorder: #525252;
+    --colorElementExtraLightBorder: #5a5a5a;
+    --boxShadowLightColor: #000;
+    --menu-background: rgb(58, 62, 65);
+    --menu-background-hover: rgb(36, 39, 40);
+}
