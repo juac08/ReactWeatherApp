@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_THEME, SET_UNIT } from "../store/settings/settingsSlice";
 import { RootState } from "../store/store";
-import BrandTooltip from "./UI/tooltip/BrandTooltip";
+import BrandTooltip from "./UI/BrandTooltip/BrandTooltip";
 
 /**
  * React Functional Component.
@@ -47,15 +47,21 @@ const Header: React.FC<HeaderOwnProps> = () => {
   }, [settings.tempUnit]);
 
   return (
-    <Flex justifyContent="space-between" p="20px" alignItems="center">
-      <Text>Weather App</Text>
+    <Flex
+      justifyContent="space-between"
+      alignItems="center"
+      bg="purple.900"
+      p="20px"
+      borderRadius={"md"}
+    >
+      <Text color="white">Weather App</Text>
       <Flex gap={2}>
         <BrandTooltip label={ariaLabelColorMode}>
           <Button
             aria-label={ariaLabelColorMode}
             onClick={setTheme}
             size="sm"
-            colorScheme={"linkedin"}
+            colorScheme={"purple"}
           >
             {themeIcon}
           </Button>
@@ -65,7 +71,7 @@ const Header: React.FC<HeaderOwnProps> = () => {
             aria-label={ariaLabelTempUnit}
             onClick={setTempUnit}
             size="sm"
-            colorScheme={"linkedin"}
+            colorScheme={"purple"}
           >
             {tempUnitIcon}
           </Button>
