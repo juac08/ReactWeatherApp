@@ -17,16 +17,16 @@ export const settingsSlice = createSlice({
 
   reducers: {
     SET_THEME: (state, action) => {
-      return (state.theme = action.payload);
+      state.theme = action.payload;
     },
     SET_UNIT: (state, action) => {
-      return (state.tempUnit = action.payload);
+      state.tempUnit = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
 
-export const { SET_THEME } = settingsSlice.actions;
+export const { SET_THEME, SET_UNIT } = settingsSlice.actions;
 
 export default settingsSlice.reducer;
