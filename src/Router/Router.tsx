@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 import { Outlet, createBrowserRouter, useLocation } from "react-router-dom";
+import Header from "../components/Header";
 const Dashboard = React.lazy(() => import("../pages/Dashboard"));
 const Details = React.lazy(() => import("../pages/Details"));
 
@@ -9,6 +10,7 @@ export const Layout = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <ScrollToTop pathname={location.pathname} />
+      <Header />
       <Outlet key={location.key} />
     </Suspense>
   );
