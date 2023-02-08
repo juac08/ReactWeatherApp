@@ -19,7 +19,7 @@ import {
 const DashboardForm: React.FC<DashboardFormOwnProps> = () => {
   return (
     <Flex mt="20px">
-      <FormControl isRequired maxW={"30%"}>
+      <FormControl isRequired maxW={"400px"}>
         <FormLabel cursor="pointer">City Name</FormLabel>
         <InputGroup size="md">
           <Input type="text" placeholder="Enter city name and press enter..." />
