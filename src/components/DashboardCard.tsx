@@ -1,4 +1,12 @@
-import { Card, CardBody, CardHeader, Heading } from "@chakra-ui/react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Heading,
+} from "@chakra-ui/react";
 import React from "react";
 
 /**
@@ -9,8 +17,8 @@ const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
     <Card
       variant="elevated"
       minW={"300px"}
-      textAlign="center"
-      borderTop="2px solid purple"
+      align="center"
+      borderTop="1px solid purple"
     >
       <CardHeader>
         <Heading size="md"> {city}</Heading>
@@ -18,6 +26,11 @@ const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
       <CardBody>
         <Heading>3 ℃</Heading>
       </CardBody>
+      <CardFooter>
+        <Button colorScheme="purple" variant="outline">
+          View Details <ArrowForwardIcon ml="10px" />
+        </Button>
+      </CardFooter>
     </Card>
   );
 };
@@ -29,4 +42,4 @@ interface DashBoardCardOwnProps {
   city: string;
 }
 
-export default DashBoardCard;
+export default React.memo(DashBoardCard);
