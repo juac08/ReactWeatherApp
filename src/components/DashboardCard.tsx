@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -7,31 +8,49 @@ import {
   CardHeader,
   Heading,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useFetchData } from "../helpers/hooks/useGetData";
+import { RootState } from "../store/store";
+import LoadingSkelton from "./UI/Loading/LoadingSkelton";
 
 /**
  * React Functional Component.
  */
 const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
+  const unit = useSelector((state: RootState) => state.settings.tempUnit);
+  const { data, loading, error } = useFetchData(city);
+  console.log(data);
+
+  const getTemp = useMemo(() => {
+    return unit === "C" ? "3 ℃" : "37 ℉";
+  }, [unit]);
+
   return (
-    <Card
-      variant="elevated"
-      minW={"300px"}
-      align="center"
-      borderTop="1px solid purple"
-    >
-      <CardHeader>
-        <Heading size="md"> {city}</Heading>
-      </CardHeader>
-      <CardBody>
-        <Heading>3 ℃</Heading>
-      </CardBody>
-      <CardFooter>
-        <Button colorScheme="purple" variant="outline">
-          View Details <ArrowForwardIcon ml="10px" />
-        </Button>
-      </CardFooter>
-    </Card>
+    <>
+      {loading && <LoadingSkelton loading={loading} />}
+      {error && <p>Error</p>}
+      {data && (
+        <Card
+          variant="elevated"
+          minW={"300px"}
+          align="center"
+          borderTop="1px solid purple"
+        >
+          <CardHeader>
+            <Heading size="md"> {data?.name}</Heading>
+          </CardHeader>
+          <CardBody>
+            <Heading>{getTemp}</Heading>
+          </CardBody>
+          <CardFooter>
+            <Button colorScheme="purple" variant="outline">
+              View Details <ArrowForwardIcon ml="10px" />
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+    </>
   );
 };
 

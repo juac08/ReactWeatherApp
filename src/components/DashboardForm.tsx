@@ -20,7 +20,7 @@ const DashboardForm: React.FC<DashboardFormOwnProps> = ({ onCityChange }) => {
   const [input, setInput] = useState("");
 
   const handleInputChange = (e: any) => {
-    if (!e.target.value) return;
+    e.preventDefault();
     setInput(e.target.value);
   };
 
@@ -60,8 +60,8 @@ const DashboardForm: React.FC<DashboardFormOwnProps> = ({ onCityChange }) => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <FormHelperText>City name should be text.</FormHelperText>
-        <FormErrorMessage>Error message</FormErrorMessage>
+        <FormHelperText>Hint: Oslo | Paris etc...</FormHelperText>
+        <FormErrorMessage>{}</FormErrorMessage>
       </FormControl>
     </Flex>
   );
