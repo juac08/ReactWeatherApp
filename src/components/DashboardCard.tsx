@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -20,11 +19,11 @@ import LoadingSkelton from "./UI/Loading/LoadingSkelton";
 const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
   const unit = useSelector((state: RootState) => state.settings.tempUnit);
   const { data, loading, error } = useFetchData(city);
-  console.log(data);
 
   const getTemp = useMemo(() => {
-    return unit === "C" ? "3 ℃" : "37 ℉";
-  }, [unit]);
+    if (!data?.main.temp) return 0;
+    return unit === "C" ? data?.main.temp : (data?.main.temp * 9) / 5 + 32;
+  }, [data?.main.temp, unit]);
 
   return (
     <>
@@ -38,10 +37,13 @@ const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
           borderTop="1px solid purple"
         >
           <CardHeader>
-            <Heading size="md"> {data?.name}</Heading>
+            <Heading size="md"> {data.name}</Heading>
           </CardHeader>
           <CardBody>
-            <Heading>{getTemp}</Heading>
+            <Heading>
+              {Math.round(getTemp)}
+              <small>{unit === "C" ? " °C" : " °F"}</small>
+            </Heading>
           </CardBody>
           <CardFooter>
             <Button colorScheme="purple" variant="outline">

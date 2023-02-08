@@ -39,11 +39,16 @@ const DashboardForm: React.FC<DashboardFormOwnProps> = ({ onCityChange }) => {
             type="text"
             placeholder="Enter city name and press enter..."
             onChange={handleInputChange}
+            variant="flushed"
+            colorScheme={"red"}
             value={input}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
+            }}
+            _focusVisible={{
+              borderColor: "purple",
             }}
           />
           <InputLeftElement>
@@ -51,10 +56,11 @@ const DashboardForm: React.FC<DashboardFormOwnProps> = ({ onCityChange }) => {
           </InputLeftElement>
           <InputRightElement>
             <Button
-              variant={"outline"}
+              variant={"solid"}
               colorScheme="purple"
               type="submit"
               onClick={handleSubmit}
+              mb="10px"
             >
               <ArrowForwardIcon />
             </Button>

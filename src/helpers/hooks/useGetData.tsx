@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../axios";
+import { WeatherData } from "../../types/weather.types";
 
 export const useFetchData = (url: string) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,6 +23,7 @@ export const useFetchData = (url: string) => {
   useEffect(() => {
     if (!url) return;
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
   return { data, loading, error };

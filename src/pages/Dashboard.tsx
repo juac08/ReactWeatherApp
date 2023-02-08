@@ -11,7 +11,6 @@ const Dashboard: React.FC<DashboardOwnProps> = () => {
   const [city, setCity] = React.useState<string>("");
 
   const onCityChange = (cityName: string) => {
-    console.log("onCityChange", cityName);
     setCity(cityName);
   };
 
