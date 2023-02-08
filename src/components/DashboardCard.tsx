@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useFetchData } from "../helpers/hooks/useGetData";
 import { RootState } from "../store/store";
 import LoadingSkelton from "./UI/Loading/LoadingSkelton";
@@ -18,12 +19,17 @@ import LoadingSkelton from "./UI/Loading/LoadingSkelton";
  */
 const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
   const unit = useSelector((state: RootState) => state.settings.tempUnit);
+  const navigate = useNavigate();
   const { data, loading, error } = useFetchData(city);
 
   const getTemp = useMemo(() => {
     if (!data?.main.temp) return 0;
     return unit === "C" ? data?.main.temp : (data?.main.temp * 9) / 5 + 32;
   }, [data?.main.temp, unit]);
+
+  const handleClick = () => {
+    navigate(`/dashboard/${city}`);
+  };
 
   return (
     <>
@@ -46,7 +52,11 @@ const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
             </Heading>
           </CardBody>
           <CardFooter>
-            <Button colorScheme="purple" variant="outline">
+            <Button
+              colorScheme="purple"
+              variant="outline"
+              onClick={handleClick}
+            >
               View Details <ArrowForwardIcon ml="10px" />
             </Button>
           </CardFooter>

@@ -20,14 +20,26 @@ export const weatherDataSlice = createSlice({
     ADD_WEATHER_DATA: (state, action) => {
       state.weatherData.push(action.payload);
     },
-    RESET: (state) => {
+
+    RESET_WEATHER_DATA: (state) => {
       state.weatherData = [];
+    },
+    SET_LOCATION: (state, action) => {
+      state.location = action.payload;
+    },
+    RESET_LOCATION: (state, action) => {
+      state.location = "";
     },
   },
 });
 
 // Action creators are generated for each case reducer function
 
-export const { ADD_WEATHER_DATA, RESET } = weatherDataSlice.actions;
+export const {
+  ADD_WEATHER_DATA,
+  RESET_WEATHER_DATA,
+  SET_LOCATION,
+  RESET_LOCATION,
+} = weatherDataSlice.actions;
 
 export default weatherDataSlice.reducer;
