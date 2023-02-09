@@ -16,6 +16,7 @@ import { useFetchData } from "../../helpers/hooks/useGetData";
 import { RootState } from "../../store/store";
 import LoadingSkelton from "../UI/Loading/LoadingSkelton";
 import BrandTooltip from "../UI/Tooltip/BrandTooltip";
+import { getTemp } from "../../helpers/math.helpers";
 
 /**
  * React Functional Component.
@@ -25,9 +26,9 @@ const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
   const navigate = useNavigate();
   const { data, loading, error } = useFetchData(city);
 
-  const getTemp = useMemo(() => {
-    if (!data?.main.temp) return 0;
-    return unit === "C" ? data?.main.temp : (data?.main.temp * 9) / 5 + 32;
+  const temprature = useMemo(() => {
+    if (!data?.main.temp) return null;
+    return Math.round(getTemp(data?.main.temp, unit));
   }, [data?.main.temp, unit]);
 
   const handleClick = () => {
@@ -52,7 +53,7 @@ const DashBoardCard: React.FC<DashBoardCardOwnProps> = ({ city }) => {
           </CardHeader>
           <CardBody>
             <Heading>
-              {Math.round(getTemp)}
+              {temprature}
               <small>{unit === "C" ? " °C" : " °F"}</small>
             </Heading>
           </CardBody>
