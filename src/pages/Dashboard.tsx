@@ -35,7 +35,8 @@ const Dashboard: React.FC<DashboardOwnProps> = () => {
       dispatch(RESET_WEATHER_DATA());
     }, 180000);
     return () => clearInterval(interval);
-  }, [cityName, dispatch, location]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cityName]);
 
   return (
     <motion.div
