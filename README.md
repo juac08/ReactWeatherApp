@@ -16,7 +16,7 @@ Chakara UI. We can build witout the UI library. You can check the basic version 
 
 ### `Data store`
 
-Even this app don't need a redux but I just want to show the setup.
+Even this app don't need a redux but I just want to show you the setup.
 
 ### `Axios library`
 
